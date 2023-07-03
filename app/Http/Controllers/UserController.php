@@ -10,9 +10,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $users = User::select('*')->offset(intval($request->offset))->limit(intval($request->limit))->get();;
         return response()->json($users);
     }
 
