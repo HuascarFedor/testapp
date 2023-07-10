@@ -11,9 +11,9 @@ class JobController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $jobs = Job::all();
+        $jobs = Job::select('*')->offset(intval($request->offset))->limit(intval($request->limit))->get();;
         return response()->json($jobs);
     }
 
